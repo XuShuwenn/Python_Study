@@ -1,6 +1,6 @@
 # Python_Study_CS61A
 
-> These are my records of studying UCB CS61A course.
+> These codes are some of my records of studying the UCB CS61A course.
 
 ## CS61A: Structure and Interpretation of Computer Programs
 
