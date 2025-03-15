@@ -1,0 +1,81 @@
+import numpy as np
+#1.创建数组
+arr=np.array([1,2,3,4,5])
+print(arr)
+print(type(arr))
+#2.检查数组维数
+print(arr.ndim)
+#3.访问数组中的元素#负索引：从数组尾部开始访问元素
+print(arr[0])
+#4.数组裁切[start:end:step]裁切[start,end)区间的元素
+#若不传step,默认为0;不传end,默认为该维度数组长度;不传step,视为1
+arr=np.array([1,2,3,4,5,6,7])
+print(arr[1:5])
+print(arr[4:])
+print(arr[:4])
+#负裁切
+print(arr[-3:-1])#输出[5,6]
+#5.numpy数组副本vs视图
+#副本是一个新数组，对副本所做的更改不影响原始数组;
+#视图只是原始数组的一个视图,不拥有数据,对视图所做的更改会影响原始数组
+#数组的裁切返回的是视图，不是副本
+x=arr.copy()#创建副本
+y=arr.view()#创建视图
+#6.数组形状shape，该属性返回一个元组，每个索引具有相应的元素数量
+arr1=np.array([[1,2,3,4],[5,6,7,8],[5,6,7,8]])
+print(arr1.shape)#输出(3,4)意味着有2维
+#7.数组重塑:更改数组形状，不改变数据
+arr2=np.array([1,2,3,4,5,6,7,8,9,10,11,12])
+newarr=arr2.reshape(4,3)
+print(arr2.shape)
+print(newarr)
+print(newarr.shape)
+#reshape返回的是视图
+#未知维数：传入-1
+newarr=arr2.reshape(2,3,-1)
+print(newarr)
+#8.展平数组:将多维数组转换成1D数组
+newarr=arr1.reshape(-1)
+print(newarr)
+#9.迭代数组
+for x in arr1:
+    print(x)
+
+#使用nditer()函数迭代数组
+for x in np.nditer(arr1):
+    print(x)#不需要写多重循环
+#以不同步长迭代数组
+arr3=np.array([[1,2,3],[4,5,6]])
+for x in np.nditer(arr3[:,::2]):
+    print(x)
+#使用ndenumerate()函数枚举迭代数组,输出(索引,值)
+for idx,x in np.ndenumerate(arr3):
+    print(idx,x)
+#10.连接数组
+arr4=np.array([[1,2],[3,4]])
+arr5=np.array([[5,6],[7,8]])
+arr6=np.concatenate((arr4,arr5))
+print(arr6,arr6.shape)
+#沿轴axis=1连接数组
+arr6=np.concatenate((arr4,arr5),axis=1)
+print(arr6,arr6.shape)
+#11.拆分数组
+arr7=np.array([1,2,3,4,5,6])
+newarr=np.array_split(arr7,3)
+print(newarr)
+#12.搜索数组
+#where()函数返回索引
+x=np.where(arr7==4)
+print(x)
+#13.搜索已排序数组
+x=np.searchsorted(arr7,4)
+print(x)
+#searchsorted()函数返回（小于等于）插入值的索引 
+#14.排序数组
+arr8=np.array([3,2,0,1])
+print(np.sort(arr8))
+#15.过滤数组：(创建布尔数组，过滤出True的元素)
+arr9=np.array([41,42,43,44])
+x=[True,False,True,False]
+newarr=arr9[x]
+print(newarr)
